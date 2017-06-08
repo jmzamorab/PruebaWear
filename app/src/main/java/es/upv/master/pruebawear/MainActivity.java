@@ -4,6 +4,7 @@ import android.app.Notification;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.NotificationCompat;
+import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.support.v4.app.NotificationManagerCompat;
@@ -25,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
                     Notification notificacion = new NotificationCompat.Builder(MainActivity.this)
                             .setSmallIcon(R.mipmap.ic_launcher)
                             .setContentTitle("Título")
-                            .setContentText("Notificación Android Wear")
+                            //.setContentText("Notificación Android Wear")
+                            .setContentText(Html.fromHtml("<b>Notificación</b> <u>Android <i>Wear</i></u>"))
                             .build();
                     NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MainActivity.this);
                     notificationManager.notify(notificacionId, notificacion);
