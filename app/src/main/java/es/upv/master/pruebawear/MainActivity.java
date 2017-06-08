@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
                 //Intent intencionMapa = new Intent(MainActivity.this, MainActivity.class);
                 Intent intencionMapa = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=universidad+politecnica+valencia"));
                 PendingIntent intencionPendienteMapa = PendingIntent.getActivity(MainActivity.this, 0, intencionMapa, 0);
+                Intent intencionLlamar = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:555123456"));
+                PendingIntent intencionPendienteLlamar = PendingIntent.getActivity(MainActivity.this, 0, intencionLlamar, 0);
 
                 int notificacionId = 001;
                 Notification notificacion = new NotificationCompat.Builder(MainActivity.this)
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
                         //.setContentText("Notificación Android Wear")
                         .setContentText(Html.fromHtml("<b>Notificación</b> <u>Android <i>Wear</i></u>"))
                         .setContentIntent(intencionPendienteMapa)
+                        .addAction(android.R.drawable.ic_menu_call, "llamar", intencionPendienteLlamar)
                         .build();
                 NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MainActivity.this);
                 notificationManager.notify(notificacionId, notificacion);
