@@ -3,6 +3,7 @@ package es.upv.master.pruebawear;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -25,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Creamos intención pendiente
-                Intent intencionMapa = new Intent(MainActivity.this, MainActivity.class);
+                //Intent intencionMapa = new Intent(MainActivity.this, MainActivity.class);
+                Intent intencionMapa = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=universidad+politecnica+valencia"));
                 PendingIntent intencionPendienteMapa = PendingIntent.getActivity(MainActivity.this, 0, intencionMapa, 0);
 
                 int notificacionId = 001;
