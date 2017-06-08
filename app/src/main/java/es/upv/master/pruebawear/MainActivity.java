@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
                         //.setContentText("Notificación Android Wear")
                         .setContentText(Html.fromHtml("<b>Notificación</b> <u>Android <i>Wear</i></u>"))
                         .setContentIntent(intencionPendienteMapa)
-                        .addAction(android.R.drawable.ic_menu_call, "llamar", intencionPendienteLlamar)
+                        .addAction(R.mipmap.ic_action_call, "llamar", intencionPendienteLlamar)
                         .build();
                 NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MainActivity.this);
                 notificationManager.notify(notificacionId, notificacion);
