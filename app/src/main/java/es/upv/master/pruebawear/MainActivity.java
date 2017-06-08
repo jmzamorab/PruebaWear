@@ -27,19 +27,22 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Creamos intención pendiente
                 //Intent intencionMapa = new Intent(MainActivity.this, MainActivity.class);
-                Intent intencionMapa = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=universidad+politecnica+valencia"));
-                PendingIntent intencionPendienteMapa = PendingIntent.getActivity(MainActivity.this, 0, intencionMapa, 0);
+               // Intent intencionMapa = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=universidad+politecnica+valencia"));
+               // PendingIntent intencionPendienteMapa = PendingIntent.getActivity(MainActivity.this, 0, intencionMapa, 0);
                 Intent intencionLlamar = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:555123456"));
                 PendingIntent intencionPendienteLlamar = PendingIntent.getActivity(MainActivity.this, 0, intencionLlamar, 0);
 
                 int notificacionId = 001;
+                NotificationCompat.Action accion = new NotificationCompat.Action.Builder(R.mipmap.ic_action_call, "llamar Wear", intencionPendienteLlamar).build();
+
                 Notification notificacion = new NotificationCompat.Builder(MainActivity.this)
                         .setSmallIcon(R.mipmap.ic_launcher)
                         .setContentTitle("Título")
                         //.setContentText("Notificación Android Wear")
                         .setContentText(Html.fromHtml("<b>Notificación</b> <u>Android <i>Wear</i></u>"))
-                        .setContentIntent(intencionPendienteMapa)
+                       // .setContentIntent(intencionPendienteMapa)
                         .addAction(R.mipmap.ic_action_call, "llamar", intencionPendienteLlamar)
+                        .extend(new NotificationCompat.WearableExtender().addAction(accion))
                         .build();
                 NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MainActivity.this);
                 notificationManager.notify(notificacionId, notificacion);
