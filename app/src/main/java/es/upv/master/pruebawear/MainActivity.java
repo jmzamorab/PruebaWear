@@ -3,6 +3,7 @@ package es.upv.master.pruebawear;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NotificationManagerCompat;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         wearButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String s="Texto largo de prueba, .... en un lugar de la mancha, de cuyo nombre no quiero acordarme ....";
                 // Creamos intención pendiente
                 //Intent intencionMapa = new Intent(MainActivity.this, MainActivity.class);
                 Intent intencionMapa = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=universidad+politecnica+valencia"));
@@ -49,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
                         // .setContentIntent(intencionPendienteMapa)
                         .addAction(R.mipmap.ic_action_call, "llamar", intencionPendienteLlamar)
                         .extend(new NotificationCompat.WearableExtender().addActions(listaAcciones))
+                        .setLargeIcon(BitmapFactory.decodeResource( getResources(), R.drawable.escudo_upv))
+                        .setStyle(new NotificationCompat.BigTextStyle().bigText(s+s))
                         .build();
                 NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MainActivity.this);
                 notificationManager.notify(notificacionId, notificacion);
