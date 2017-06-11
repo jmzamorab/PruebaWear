@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">PruebaWear</string>
+    <string-array name="opciones_respuesta">
+        <item>Si</item>
+        <item>No</item>
+        <item>Quizá</item>
+        <item>Preguntar después</item>
+    </string-array>
 </resources>
