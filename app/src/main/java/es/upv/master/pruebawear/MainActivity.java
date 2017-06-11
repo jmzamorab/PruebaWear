@@ -20,6 +20,7 @@ import java.util.List;
 //adb -d forward tcp:5601 tcp:5601
 //**********************************
 public class MainActivity extends AppCompatActivity {
+    final static String MI_GRUPO_DE_NOTIFIC = "mi_grupo_de_notific";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,15 +48,15 @@ public class MainActivity extends AppCompatActivity {
                 NotificationCompat.BigTextStyle segundaPg = new NotificationCompat.BigTextStyle();
                 segundaPg.setBigContentTitle("Página 2").bigText("PAGINA 2;  Más texto.");
                 // Creamos una notification para la segunda página Notification
-                Notification notificacionPg2 = new NotificationCompat.Builder( MainActivity.this) .setStyle(segundaPg) .build();
+                Notification notificacionPg2 = new NotificationCompat.Builder(MainActivity.this).setStyle(segundaPg).build();
 
                 NotificationCompat.BigTextStyle terceraPg = new NotificationCompat.BigTextStyle();
                 terceraPg.setBigContentTitle("Página 3").bigText("PAGINA 3;  Más texto aún III.");
-                Notification notificacionPg3 = new NotificationCompat.Builder( MainActivity.this) .setStyle(terceraPg) .build();
+                Notification notificacionPg3 = new NotificationCompat.Builder(MainActivity.this).setStyle(terceraPg).build();
 
                 NotificationCompat.BigTextStyle cuartaPg = new NotificationCompat.BigTextStyle();
                 cuartaPg.setBigContentTitle("Página 4").bigText("PAGINA 4;  Última página IV.");
-                Notification notificacionPg4 = new NotificationCompat.Builder( MainActivity.this) .setStyle(cuartaPg) .build();
+                Notification notificacionPg4 = new NotificationCompat.Builder(MainActivity.this).setStyle(cuartaPg).build();
 
                 listaPaginas.add(notificacionPg2);
                 listaPaginas.add(notificacionPg3);
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                         setBackground(BitmapFactory.decodeResource(getResources(), R.drawable.escudo_upv))
                         .addActions(listaAcciones)
                         .addPages(listaPaginas);
-                        //addPage(notificacionPg2);
+                //addPage(notificacionPg2);
 
                 Notification notificacion = new NotificationCompat.Builder(MainActivity.this)
                         .setSmallIcon(R.mipmap.ic_launcher)
@@ -78,10 +79,31 @@ public class MainActivity extends AppCompatActivity {
                         .extend(new NotificationCompat.WearableExtender().addActions(listaAcciones))
                         // .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.escudo_upv))
                         .extend(wearableExtender)
-                        .setStyle(new NotificationCompat.BigTextStyle().bigText(s + s))
+                        .setStyle(new NotificationCompat.BigTextStyle().bigText(s))
+                        .setGroup(MI_GRUPO_DE_NOTIFIC)
                         .build();
+
                 NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MainActivity.this);
                 notificationManager.notify(notificacionId, notificacion);
+
+                int idNotificacion2 = 002;
+                Notification notificacion2 = new NotificationCompat.Builder(MainActivity.this).
+                        setContentTitle("Nueva Conferencia").
+                        setContentText("Los neutrinos").
+                        setSmallIcon(R.mipmap.ic_action_mail_add).
+                        setGroup(MI_GRUPO_DE_NOTIFIC).build();
+                //notificationManager.notify(idNotificacion2, notificacion2);
+
+                int idNotificacion3 = 003;
+                Notification notificacion3 = new NotificationCompat.Builder(MainActivity.this).
+                        setContentTitle("2 notificaciones UPV").
+                        setSmallIcon(R.mipmap.ic_action_attach)
+                        .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.escudo_upv)).
+                         setStyle(new NotificationCompat.InboxStyle().addLine("Nueva Conferencia Los neutrinos").addLine("Nuevo curso Android Wear").setBigContentTitle("2 notificaciones UPV").setSummaryText("info@upv.es")).setNumber(2)
+                        .setGroup(MI_GRUPO_DE_NOTIFIC).
+                         setGroupSummary(true).build();
+                notificationManager.notify(idNotificacion3, notificacion3);
+
             }
         });
     }
